@@ -1,0 +1,1 @@
+!function(e,i){if("function"==typeof define&&define.amd)define(["./codes"],i);else if("undefined"!=typeof exports)i(require("./codes"));else{i(e.codes),e.site={}}}(this,function(e){"use strict";new e.TapeMachine("aaa").play()});
