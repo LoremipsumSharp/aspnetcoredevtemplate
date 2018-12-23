@@ -335,3 +335,4 @@ ASALocalRun/
 .localhistory/
 /src/OAWeb/weblog
 /src/OAWeb/wwwroot/upload
+dist
