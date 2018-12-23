@@ -9,7 +9,13 @@
                 "build",
                 "${workspaceFolder}/src.csproj"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+        },
+        {
+            "type": "shell",
+            "command": "gulp watch:js-src",
+            "problemMatcher": [],
+            "label": "gulp-watch"
         }
     ]
 }

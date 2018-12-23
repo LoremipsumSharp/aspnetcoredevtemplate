@@ -45,7 +45,7 @@ gulp.task("js-build:dev", function () {
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('wwwroot/js/dist'))
 
-})
+},gulp.series(['clean-scripts']))
 
 // 生产+测试（没有sourceMap，对文件做压缩处理）
 gulp.task("js-build:prod", function () {
@@ -73,12 +73,10 @@ gulp.task("js-build:prod", function () {
         }))
         .pipe(uglify())
         .pipe(gulp.dest('wwwroot/js/dist'))
-})
+},gulp.series(['clean-scripts']))
 
 
-gulp.task("js-build", gulp.series(["clean-scripts",
-    "js-build:dev", "js-build:prod"
-]))
+
 
 
 gulp.task('watch:js-src', function () {

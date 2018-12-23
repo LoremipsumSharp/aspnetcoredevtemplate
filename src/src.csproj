@@ -8,13 +8,14 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
-  <Target Name="RunGulp" AfterTargets="Build">
+  <Target Name="RunGulpDev" AfterTargets="Build" 
+    Condition="'$(ASPNETCORE_ENVIRONMENT)'=='Development' And '$(Configuration)'=='Debug'"  >
     <!-- <Exec Command="node ./node_modules/.bin/gulp js-build" /> -->
-    <Exec Command="gulp js-build" />
+    <Exec Command="gulp js-build:dev" />
   </Target>
 
-  <!-- <Target Name="RunGulpWatch" AfterTargets="Build" Condition="'$(ASPNETCORE_ENVIRONMENT)'=='Development'">
-    <Exec Command="gulp watch:js-src" />
-  </Target> -->
+  <Target Name="RunGulpWatch" AfterTargets="Publish" Condition="'$(ASPNETCORE_ENVIRONMENT)'=='Development'">
+    <Exec Command="gulp js-build:prod" />
+  </Target>
   
 </Project>

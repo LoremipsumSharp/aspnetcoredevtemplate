@@ -6,6 +6,7 @@
     "compounds": [{
         "name": ".Net+Browser",
         "configurations": [
+            "gulp-watch",
             ".NET Core Launch (web)",
             "Launch Chrome against localhost, with sourcemaps"
         ]
@@ -20,6 +21,13 @@
             "sourceMapPathOverrides": {
                 "*": "${webRoot}/*"
             }
+        },
+        {
+
+            "name": "gulp-watch",
+            "preLaunchTask": "gulp-watch",
+            "request": "launch",
+            "type": "node"
         },
         {
             "name": ".NET Core Launch (web)",
@@ -58,6 +66,6 @@
             "type": "coreclr",
             "request": "attach",
             "processId": "${command:pickProcess}"
-        },
+        }
     ]
 }

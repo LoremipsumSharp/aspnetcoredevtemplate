@@ -9,4 +9,3 @@ import {
 var tapMachine = new TapeMachine('Hello World')
 
 tapMachine.play()
-tapMachine.play()
