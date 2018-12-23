@@ -1,9 +1,26 @@
 {
-   // Use IntelliSense to find out which attributes exist for C# debugging
-   // Use hover for the description of the existing attributes
-   // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
-   "version": "0.2.0",
-   "configurations": [
+    // Use IntelliSense to find out which attributes exist for C# debugging
+    // Use hover for the description of the existing attributes
+    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+    "version": "0.2.0",
+    "compounds": [{
+        "name": ".Net+Browser",
+        "configurations": [
+            ".NET Core Launch (web)",
+            "Launch Chrome against localhost, with sourcemaps"
+        ]
+    }],
+    "configurations": [{
+            "name": "Launch Chrome against localhost, with sourcemaps",
+            "type": "chrome",
+            "request": "launch",
+            "url": "https://localhost:5001",
+            "sourceMaps": true,
+            "webRoot": "${workspaceRoot}/wwwroot",
+            "sourceMapPathOverrides": {
+                "*": "${webRoot}/*"
+            }
+        },
         {
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
@@ -41,6 +58,6 @@
             "type": "coreclr",
             "request": "attach",
             "processId": "${command:pickProcess}"
-        }
-    ,]
+        },
+    ]
 }

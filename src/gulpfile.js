@@ -6,8 +6,8 @@ const uglify = require('gulp-uglify')
 const plumber = require('gulp-plumber')
 const sourcemaps = require('gulp-sourcemaps')
 const rename = require("gulp-rename")
-const watch = require("gulp-watch")
 const changed = require('gulp-changed')
+const mapSources = require('@gulp-sourcemaps/map-sources');
 
 gulp.task('clean-scripts', function () {
     return gulp.src('wwwroot/js/dist/**/*.js', {
@@ -30,7 +30,6 @@ gulp.task("js-build:dev", function () {
                     "@babel/env",
                     {
                         targets: {
-
                             browsers: ["since 2015", "ie >= 10"]
                         }
                     }
@@ -40,7 +39,10 @@ gulp.task("js-build:dev", function () {
                 '@babel/plugin-transform-modules-umd',
             ]
         }))
-        .pipe(sourcemaps.write())
+        .pipe(mapSources(function(sourcePath,file){
+             return '/js/src/' + sourcePath
+        }))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('wwwroot/js/dist'))
 
 })

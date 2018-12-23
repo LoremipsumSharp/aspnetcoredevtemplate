@@ -13,9 +13,8 @@
     <Exec Command="gulp js-build" />
   </Target>
 
-  <Target Name="RunGulpWatch" AfterTargets="Build" Condition="'$(ASPNETCORE_ENVIRONMENT)'=='Development'">
-    <!-- <Exec Command="node ./node_modules/.bin/gulp js-build" /> -->
+  <!-- <Target Name="RunGulpWatch" AfterTargets="Build" Condition="'$(ASPNETCORE_ENVIRONMENT)'=='Development'">
     <Exec Command="gulp watch:js-src" />
-  </Target>
+  </Target> -->
   
 </Project>
