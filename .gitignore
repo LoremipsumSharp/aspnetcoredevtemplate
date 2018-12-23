@@ -336,3 +336,6 @@ ASALocalRun/
 /src/OAWeb/weblog
 /src/OAWeb/wwwroot/upload
 dist
+
+
+.cs linguist-language=C#
