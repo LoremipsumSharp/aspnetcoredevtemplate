@@ -1,0 +1,72 @@
+{
+    // Use IntelliSense to find out which attributes exist for C# debugging
+    // Use hover for the description of the existing attributes
+    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+    "version": "0.2.0",
+    "compounds": [{
+        "name": ".Net+Browser",
+        "configurations": [
+            "Launch Gulp Watch",
+            ".NET Core Launch (web)",
+            "Launch Chrome"
+        ]
+    }],
+    "configurations": [
+         {
+
+             "name": "Launch Gulp Watch",
+             "preLaunchTask": "gulp-watch",
+             "request": "launch",
+             "type": "node"
+         },
+        {
+            "name": "Launch Chrome",
+            "type": "chrome",
+            "request": "launch",
+            "url": "https://localhost:5001",
+            "sourceMaps": true,
+            "webRoot": "${workspaceRoot}/wwwroot",
+            "sourceMapPathOverrides": {
+                "*": "${webRoot}/*"
+            }
+        },
+        {
+            "name": ".NET Core Launch (web)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/AspNetCoreDevTemplate.Web/bin/Debug/netcoreapp2.1/AspNetCoreDevTemplate.Web.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/AspNetCoreDevTemplate.Web",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart",
+            "launchBrowser": {
+                "enabled": true,
+                "args": "${auto-detect-url}",
+                "windows": {
+                    "command": "cmd.exe",
+                    "args": "/C start ${auto-detect-url}"
+                },
+                "osx": {
+                    "command": "open"
+                },
+                "linux": {
+                    "command": "xdg-open"
+                }
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        },
+    ]
+}
