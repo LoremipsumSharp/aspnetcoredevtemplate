@@ -8,6 +8,10 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AspNetCoreDevTemplate.Utils\AspNetCoreDevTemplate.Utils.csproj" />
+  </ItemGroup>
+
   <Target Name="RunGulpDev" AfterTargets="Build" Condition="'$(ASPNETCORE_ENVIRONMENT)'=='Development' And '$(Configuration)'=='Debug'">
     <!-- <Exec Command="node ./node_modules/.bin/gulp js-build" /> -->
     <Exec Command="gulp js-build:dev" />
