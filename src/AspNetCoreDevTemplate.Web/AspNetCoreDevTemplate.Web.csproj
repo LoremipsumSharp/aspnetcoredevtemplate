@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AspNetCoreDevTemplate.Utils\AspNetCoreDevTemplate.Utils.csproj" />
+    <ProjectReference Include="..\AspNetCoreDevTemplate.Serivces\AspNetCoreDevTemplate.Serivces.csproj" />
   </ItemGroup>
 
   <Target Name="RunGulpDev" AfterTargets="Build" Condition="'$(ASPNETCORE_ENVIRONMENT)'=='Development' And '$(Configuration)'=='Debug'">

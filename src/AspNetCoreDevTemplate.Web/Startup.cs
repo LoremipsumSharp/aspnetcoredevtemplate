@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using AspNetCoreDevTemplate.Web.Extensions;
 
 namespace AspNetCoreDevTemplate.Web
 {
@@ -31,8 +32,10 @@ namespace AspNetCoreDevTemplate.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddEventHandlers(AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.StartsWith("Service")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

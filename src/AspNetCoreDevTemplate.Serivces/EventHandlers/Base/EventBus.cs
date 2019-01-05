@@ -1,8 +1,12 @@
-
 using System;
 using System.Linq;
 using System.Security.Claims;
 using AspNetCoreDevTemplate.Models.Events;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
+using AspNetCoreDevTemplate.Utils.Extensions;
 
 namespace AspNetCoreDevTemplate.Serivces.EventHandlers.Base
 {
@@ -81,8 +85,8 @@ namespace AspNetCoreDevTemplate.Serivces.EventHandlers.Base
                         catch (Exception ex)
                         {
                             ///错误信息
-                            string err_msg = "event bus:" + ex.StackTrace;
-                            _logger.LogError(err_msg);
+                            string errorMsg = "event bus:" + ex.StackTrace;
+                            _logger.LogError(errorMsg);
                         }
                     }
                 }
