@@ -1,0 +1,5 @@
+
+
+const $ = Window.JQuery
+
+export { $ }
