@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AspNetCoreDevTemplate.Web.Extensions;
+using AspNetCoreDevTemplate.Serivces.Jobs;
 
 namespace AspNetCoreDevTemplate.Web
 {
@@ -34,6 +35,8 @@ namespace AspNetCoreDevTemplate.Web
 
             services.AddEventHandlers(AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.StartsWith("Service")));
 
+            services.UseQuartz(typeof(HelloWorldJob));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
         }
@@ -50,7 +53,6 @@ namespace AspNetCoreDevTemplate.Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
