@@ -43,11 +43,6 @@ namespace AspNetCoreDevTemplate.Infastructure.Quartz
                 this.scope = scope;
             }
 
-            // public async Task Execute(IJobExecutionContext context)
-            // {
-            //     await actualJob.Execute(context);
-            //     scope.Dispose();
-            // }
 
             public async Task Execute(IJobExecutionContext context)
             {
