@@ -1,0 +1,84 @@
+{
+  "_args": [
+    [
+      "requirejs@^2.3.6",
+      "C:\\Dev\\AspNetCore\\aspnetcoredevtemplate\\src\\AspNetCoreDevTemplate.Web"
+    ]
+  ],
+  "_cnpm_publish_time": 1535350706089,
+  "_from": "requirejs@>=2.3.6-0 <3.0.0-0",
+  "_hasShrinkwrap": false,
+  "_id": "requirejs@2.3.6",
+  "_inCache": true,
+  "_location": "/requirejs",
+  "_nodeVersion": "8.9.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/requirejs_2.3.6_1535350704717_0.5412235457270926"
+  },
+  "_npmUser": {
+    "email": "jrburke@gmail.com",
+    "name": "jrburke"
+  },
+  "_npmVersion": "5.5.1",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "requirejs",
+    "raw": "requirejs@^2.3.6",
+    "rawSpec": "^2.3.6",
+    "scope": null,
+    "spec": ">=2.3.6-0 <3.0.0-0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npm.taobao.org/requirejs/download/requirejs-2.3.6.tgz",
+  "_shasum": "e5093d9601c2829251258c0b9445d4d19fa9e7c9",
+  "_shrinkwrap": null,
+  "_spec": "requirejs@^2.3.6",
+  "_where": "C:\\Dev\\AspNetCore\\aspnetcoredevtemplate\\src\\AspNetCoreDevTemplate.Web",
+  "author": {
+    "email": "jrburke@gmail.com",
+    "name": "James Burke",
+    "url": "http://github.com/jrburke"
+  },
+  "bin": {
+    "r.js": "./bin/r.js",
+    "r_js": "./bin/r.js"
+  },
+  "bugs": {
+    "url": "https://github.com/jrburke/r.js/issues"
+  },
+  "dependencies": {},
+  "description": "Node adapter for RequireJS, for loading AMD modules. Includes RequireJS optimizer",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "noattachment": false,
+    "shasum": "e5093d9601c2829251258c0b9445d4d19fa9e7c9",
+    "size": 254418,
+    "tarball": "http://registry.npm.taobao.org/requirejs/download/requirejs-2.3.6.tgz"
+  },
+  "engines": {
+    "node": ">=0.4.0"
+  },
+  "homepage": "http://github.com/jrburke/r.js",
+  "installable": true,
+  "license": "MIT",
+  "main": "./bin/r.js",
+  "maintainers": [
+    {
+      "name": "jrburke",
+      "email": "jrburke@gmail.com"
+    }
+  ],
+  "name": "requirejs",
+  "optionalDependencies": {},
+  "publish_time": 1535350706089,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrburke/r.js.git"
+  },
+  "version": "2.3.6"
+}

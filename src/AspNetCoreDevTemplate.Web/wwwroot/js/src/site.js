@@ -1,3 +1,3 @@
-﻿import { $ } from "./header";
+﻿import './header'
 
-console.log($)
+

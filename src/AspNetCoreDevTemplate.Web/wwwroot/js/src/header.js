@@ -1,5 +1,8 @@
+// import jQuery from "../../lib/jquery/dist/jquery";
 
+// window.$ = jQuery;
+// window.jQuery = jQuery;
 
-const $ = Window.JQuery
+let $ = require("jquery");
 
-export { $ }
+console.log($);
