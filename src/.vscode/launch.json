@@ -25,7 +25,7 @@
             "request": "launch",
             "url": "https://localhost:5001",
             "sourceMaps": true,
-            "webRoot": "${workspaceRoot}/wwwroot",
+            "webRoot": "${workspaceRoot}/AspNetCoreDevTemplate.Web/wwwroot",
             "sourceMapPathOverrides": {
                 "*": "${webRoot}/*"
             }

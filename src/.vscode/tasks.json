@@ -12,7 +12,7 @@
         },
         {
             "type": "shell",
-            "command": "gulp watch:js-src",
+            "command": "cd ${workspaceFolder}/AspNetCoreDevTemplate.Web && gulp watch:js-src",
             "problemMatcher": [],
             "label": "gulp-watch"
         }

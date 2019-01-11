@@ -7,12 +7,15 @@ const plumber = require("gulp-plumber");
 const sourcemaps = require("gulp-sourcemaps");
 const rename = require("gulp-rename");
 const changed = require("gulp-changed");
-const mapSources = require("@gulp-sourcemaps/map-sources");
 const merge = require("merge-stream");
+const browserify = require('browserify')
+const tap = require('gulp-tap')
+const babelify = require('babelify')
+const buffer = require('gulp-buffer')
 
-gulp.task("clean-scripts", function() {
+gulp.task("clean-scripts", function () {
   return gulp
-    .src("wwwroot/js/dist/**/*.js", {
+    .src("wwwroot/js/dist/**/*", {
       read: false
     })
     .pipe(clean());
@@ -20,40 +23,41 @@ gulp.task("clean-scripts", function() {
 
 gulp.task(
   "js-build:dev",
-  function() {
+  gulp.series("clean-scripts", function () {
     return gulp
       .src("wwwroot/js/src/**/*.js")
       .pipe(changed("wwwroot/js/dist"))
       .pipe(print())
       .pipe(plumber())
-      .pipe(sourcemaps.init())
-      .pipe(
-        babel({
-          presets: [
-            [
-              "@babel/env",
-              {
-                targets: {
-                  browsers: ["since 2015", "ie >= 10"]
+      .pipe(tap(function (file) {
+        file.contents = browserify(file.path, { debug: true })
+          .transform(babelify, {
+            presets: [
+              [
+                "@babel/env",
+                {
+                  targets: {
+                    browsers: ["since 2015", "ie >= 10"]
+                  }
                 }
-              }
+              ]
             ]
-          ],
-        plugins: ["@babel/plugin-transform-modules-umd"]
-        })
-      )
-      .pipe(
-        mapSources(function(sourcePath, file) {
-          return "/js/src/" + sourcePath;
-        })
-      )
-      .pipe(sourcemaps.write("."))
-      .pipe(gulp.dest("wwwroot/js/dist"));
-  },
-  gulp.series(["clean-scripts"])
+          }).bundle()
+      }))
+      .pipe(buffer())
+      .pipe(sourcemaps.init({ loadMaps: true }))
+      .pipe(sourcemaps.write(".", {
+        mapSources: function (sourcePath, file) {
+          return sourcePath.replace("wwwroot", '')
+        }
+      }))
+      .pipe(gulp.dest("wwwroot/js/dist", { "overwrite": true }));
+  })
 );
 
-gulp.task("copy-lib", function() {
+
+
+gulp.task("copy-lib", function () {
   const libraryPaths = [
     "./node_modules/jquery/**/*",
     "./node_modules/jquery-validation/**/*",
@@ -62,7 +66,7 @@ gulp.task("copy-lib", function() {
     "./node_modules/@types/**/*",
     "./node_modules/bootstrap/**/*"
   ];
-  var tasks = libraryPaths.map(function(path) {
+  var tasks = libraryPaths.map(function (path) {
     return gulp
       .src(path, { base: "./node_modules" })
       .pipe(gulp.dest("./wwwroot/lib"));
@@ -70,27 +74,31 @@ gulp.task("copy-lib", function() {
   return merge(tasks);
 });
 
+
+
 gulp.task(
   "js-build:prod",
-  function() {
+  gulp.series("clean-scripts", function () {
     return gulp
       .src("wwwroot/js/src/**/*.js")
       .pipe(print())
-      .pipe(
-        babel({
-          presets: [
-            [
-              "@babel/env",
-              {
-                targets: {
-                  browsers: ["since 2015", "ie >= 10"]
+      .pipe(plumber())
+      .pipe(tap(function (file) {
+        file.contents = browserify(file.path, { debug: true })
+          .transform(babelify, {
+            presets: [
+              [
+                "@babel/env",
+                {
+                  targets: {
+                    browsers: ["since 2015", "ie >= 10"]
+                  }
                 }
-              }
+              ]
             ]
-          ],
-          plugins: ["@babel/plugin-transform-modules-umd"]
-        })
-      )
+          }).bundle()
+      }))
+      .pipe(buffer())
       .pipe(
         rename({
           suffix: ".min"
@@ -98,10 +106,9 @@ gulp.task(
       )
       .pipe(uglify())
       .pipe(gulp.dest("wwwroot/js/dist"));
-  },
-  gulp.series(["clean-scripts"])
+  })
 );
 
-gulp.task("watch:js-src", function() {
+gulp.task("watch:js-src", function () {
   return gulp.watch("wwwroot/js/src/**/*.js", gulp.series(["js-build:dev"]));
 });
