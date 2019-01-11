@@ -1,5 +1,5 @@
-﻿import jQuery from "../../lib/jquery/dist/jquery";
+﻿import $ from 'jquery'
+import 'jquery-validation'
 
-let $ = jQuery;
 
-console.log(jQuery);
+console.log("jquery.validate loaded?", $().validate instanceof Function);
