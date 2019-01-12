@@ -84,7 +84,7 @@ gulp.task(
       .pipe(print())
       .pipe(plumber())
       .pipe(tap(function (file) {
-        file.contents = browserify(file.path, { debug: true })
+        file.contents = browserify(file.path)
           .transform(babelify, {
             presets: [
               [
