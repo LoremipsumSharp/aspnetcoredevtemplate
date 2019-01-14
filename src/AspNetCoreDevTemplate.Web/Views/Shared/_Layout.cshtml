@@ -53,9 +53,12 @@
     </div>
     <environment include="Development">
         <script src="~/lib/layui/layui.all.js"></script>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="/js/dist/site.js"></script>
+        <script src="/js/dist/jquery-plugin-template.js"></script>
         <script>
             var layer = window.layui.layer
+            $("div").pluginName()
         </script>
     </environment>
     <environment exclude="Development">
