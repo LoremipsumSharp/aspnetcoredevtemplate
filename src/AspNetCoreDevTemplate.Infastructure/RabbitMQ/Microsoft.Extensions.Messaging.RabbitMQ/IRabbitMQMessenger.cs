@@ -11,5 +11,10 @@ namespace Microsoft.Extensions.Messaging.RabbitMQ
         /// Publishes a message to the appropriate exchange.
         /// </summary>
         void Publish(object message);
+
+        /// <summary>
+        /// Publishes a message to the appropriate exchange with delay
+        /// </summary>
+        void PublishDelay(object message, TimeSpan delay);
     }
 }

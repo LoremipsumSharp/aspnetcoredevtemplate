@@ -12,5 +12,6 @@ namespace Microsoft.Extensions.Messaging.RabbitMQ
         public string UserName { get; set; }
         public int? Port { get; set; }
         public string VirtualHost { get; set; }
+        public string DelayQueueName { get; set; }
     }
 }

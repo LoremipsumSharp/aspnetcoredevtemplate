@@ -35,10 +35,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
                 var exchangeName = settings.ExchangeName ?? "RabbitMQMessenger";
                 var queueName = settings.QueueName ?? Assembly.GetEntryAssembly().GetName().Name;
+                var delayQueuName = settings.DelayQueueName ?? Assembly.GetEntryAssembly().GetName().Name;
                 return new RabbitMQMessenger(connection, builder, logger, exchangeName, queueName);
             });
 
-          //  services.AddSingleton<IHostedService, RabbitMQHostedService>();
+            //  services.AddSingleton<IHostedService, RabbitMQHostedService>();
             return services;
         }
     }
