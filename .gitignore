@@ -337,3 +337,5 @@ ASALocalRun/
 /src/OAWeb/wwwroot/upload
 dist
 
+/src/AspNetCoreDevTemplate.Web/appsettings.json
+/src/AspNetCoreDevTemplate.Web/appsettings.Development.json

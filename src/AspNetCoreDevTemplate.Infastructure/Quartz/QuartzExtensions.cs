@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Specialized;
 using System.Linq;
@@ -8,9 +6,10 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Quartz.Impl;
 using Quartz.Spi;
 using Quartz;
+using AspNetCoreDevTemplate.Infastructure;
 using AspNetCoreDevTemplate.Infastructure.Quartz;
 
-namespace AspNetCoreDevTemplate.Web.Extensions
+namespace AspNetCoreDevTemplate.Infastructure.Quartz
 {
     public static class QuartzExtensions
     {
@@ -29,9 +28,8 @@ namespace AspNetCoreDevTemplate.Web.Extensions
             {
 
                 var props = new NameValueCollection {
-          { "quartz.serializer.type", "json" },
-        //  { "quartz.jobStore.useProperties" ,"false" }
-        };
+                    { "quartz.serializer.type", "json" },
+                    };
                 var schedulerFactory = new StdSchedulerFactory(props);
                 var scheduler = schedulerFactory.GetScheduler().Result;
                 scheduler.JobFactory = provider.GetService<IJobFactory>();

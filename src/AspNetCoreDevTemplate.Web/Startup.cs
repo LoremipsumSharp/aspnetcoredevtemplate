@@ -11,6 +11,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AspNetCoreDevTemplate.Web.Extensions;
 using AspNetCoreDevTemplate.Serivces.Jobs;
+using AspNetCoreDevTemplate.Infastructure.Quartz;
+using AspNetCoreDevTemplate.Web.Models;
+using Microsoft.Extensions.Messaging.RabbitMQ;
+using System.Diagnostics;
 
 namespace AspNetCoreDevTemplate.Web
 {
@@ -26,6 +30,8 @@ namespace AspNetCoreDevTemplate.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+            services.Configure<RabbitMQSettings>(Configuration.GetSection("RabbitMQSettings"));
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -33,9 +39,17 @@ namespace AspNetCoreDevTemplate.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            
             services.AddEventHandlers(AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.StartsWith("Service")));
-
             services.UseQuartz(typeof(HelloWorldJob));
+            services.AddRabbitMQ(x =>
+            {
+                x.Subscribe<SimpleMQMessage>((msg, token) =>
+                {
+                    Debug.WriteLine(msg.Body);
+                    return Task.FromResult(true);
+                });
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
