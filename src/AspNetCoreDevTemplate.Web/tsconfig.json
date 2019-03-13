@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "./wwwroot/ts/dist",
+        "strictNullChecks": true,
+        "target": "ES5"
+    },
+    "include": [
+        "./wwwroot/ts/src/**/*.ts"
+    ]
+}

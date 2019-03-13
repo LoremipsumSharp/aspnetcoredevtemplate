@@ -1,6 +1,7 @@
 
 
 
+using System;
 using AspNetCoreDevTemplate.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Messaging.RabbitMQ;
@@ -17,7 +18,7 @@ namespace AspNetCoreDevTemplate.Web
 
         public IActionResult Index()
         {
-            _rabbitmqMessagener.Publish(new SimpleMQMessage(){ Body = "Helloworld" });
+            _rabbitmqMessagener.PublishDelay(new SimpleMQMessage(){ Body = "Helloworld" },TimeSpan.FromSeconds(5));
             return Ok();
         }
     }

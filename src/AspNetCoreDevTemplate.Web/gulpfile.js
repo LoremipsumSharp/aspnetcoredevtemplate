@@ -12,6 +12,7 @@ const browserify = require('browserify')
 const tap = require('gulp-tap')
 const babelify = require('babelify')
 const buffer = require('gulp-buffer')
+const ts = require('gulp-typescript');
 
 gulp.task("clean-scripts", function () {
   return gulp
@@ -20,10 +21,17 @@ gulp.task("clean-scripts", function () {
     })
     .pipe(clean());
 });
+gulp.task("ts-compile", function () {
+  var tsProject = ts.createProject('./tsconfig.json', {
+    outDir: './wwwroot/ts/dest'
+  });
+  var tsResult = tsProject.src().pipe(tsProject());
+  return tsResult.js.pipe(gulp.dest('./wwwroot/js/src'));
+})
 
 gulp.task(
   "js-build:dev",
-  gulp.series("clean-scripts", function () {
+  gulp.series(['ts-compile', "clean-scripts",]), function () {
     return gulp
       .src("wwwroot/js/src/**/*.js")
       .pipe(changed("wwwroot/js/dist"))
@@ -53,7 +61,8 @@ gulp.task(
       }))
       .pipe(gulp.dest("wwwroot/js/dist", { "overwrite": true }));
   })
-);
+
+
 
 
 
@@ -78,7 +87,7 @@ gulp.task("copy-lib", function () {
 
 gulp.task(
   "js-build:prod",
-  gulp.series("clean-scripts", function () {
+  gulp.series(["ts-compile", "clean-scripts"]), function () {
     return gulp
       .src("wwwroot/js/src/**/*.js")
       .pipe(print())
@@ -107,7 +116,6 @@ gulp.task(
       .pipe(uglify())
       .pipe(gulp.dest("wwwroot/js/dist"));
   })
-);
 
 gulp.task("watch:js-src", function () {
   return gulp.watch("wwwroot/js/src/**/*.js", gulp.series(["js-build:dev"]));
