@@ -1,5 +1,6 @@
 const gulp = require("gulp");
-const babel = require("gulp-babel");
+var gutil = require('gulp-util');
+var path = require('path');
 const print = require("gulp-print").default;
 const clean = require("gulp-clean");
 const uglify = require("gulp-uglify");
@@ -13,6 +14,7 @@ const tap = require('gulp-tap')
 const babelify = require('babelify')
 const buffer = require('gulp-buffer')
 const ts = require('gulp-typescript');
+const fse = require('fs-extra');
 
 gulp.task("clean-scripts", function () {
   return gulp
@@ -29,11 +31,33 @@ gulp.task("ts-compile", function () {
   return tsResult.js.pipe(gulp.dest('./wwwroot/js/src'));
 })
 
+
+gulp.task("copy-lib", function () {
+  const libraryPaths = [
+    "./node_modules/jquery/**/*",
+    "./node_modules/jquery-validation/**/*",
+    "./node_modules/jquery-validation-unobtrusive/**/*",
+    "./node_modules/requirejs/**/*",
+    "./node_modules/@types/**/*",
+    "./node_modules/bootstrap/**/*",
+    "./node_modules/tui-editor/**/*",
+    "./node_modules/highlight.js/**/*",
+    "./node_modules/codemirror/**/*"
+  ];
+  var tasks = libraryPaths.map(function (path) {
+    return gulp
+      .src(path, { base: "./node_modules" })
+      .pipe(gulp.dest("./wwwroot/lib"));
+  });
+  return merge(tasks);
+});
+
+
 gulp.task(
   "js-build:dev",
-  gulp.series(['ts-compile', "clean-scripts",]), function () {
+  gulp.series(["clean-scripts", 'ts-compile'], function () {
     return gulp
-      .src("wwwroot/js/src/**/*.js")
+      .src("./wwwroot/js/src/**/*.js")
       .pipe(changed("wwwroot/js/dist"))
       .pipe(print())
       .pipe(plumber())
@@ -50,7 +74,37 @@ gulp.task(
                 }
               ]
             ]
-          }).bundle()
+          }).transform("browserify-css", {
+            minify: true,
+            global: true,
+            rootDir: './wwwroot',
+            processRelativeUrl: function (relativeUrl) {
+              gutil.log(relativeUrl)
+              var stripQueryStringAndHashFromPath = function (url) {
+                return url.split('?')[0].split('#')[0];
+              };
+              var rootDir = path.resolve(process.cwd(), 'wwwroot');
+              gutil.log(rootDir)
+              var relativePath = stripQueryStringAndHashFromPath(relativeUrl);
+              var queryStringAndHash = relativeUrl.substring(relativePath.length);
+
+              //
+              // Copying files from '../node_modules/bootstrap/' to 'dist/vendor/bootstrap/'
+              //
+              var prefix = '../node_modules/';
+
+              var vendorPath = 'lib/' + relativePath.substring(prefix.length);
+              var source = path.join(rootDir, relativePath);
+              var target = path.join(rootDir, vendorPath);
+
+              gutil.log('Copying file from ' + JSON.stringify(source) + ' to ' + JSON.stringify(target));
+              fse.copySync(source, target);
+
+              // Returns a new path string with original query string and hash fragments
+              return vendorPath + queryStringAndHash;
+            }
+          })
+          .bundle()
       }))
       .pipe(buffer())
       .pipe(sourcemaps.init({ loadMaps: true }))
@@ -59,29 +113,12 @@ gulp.task(
           return sourcePath.replace("wwwroot", '')
         }
       }))
-      .pipe(gulp.dest("wwwroot/js/dist", { "overwrite": true }));
-  })
+      .pipe(gulp.dest("./wwwroot/js/dist", { "overwrite": true }));
+  }))
 
 
 
 
-
-gulp.task("copy-lib", function () {
-  const libraryPaths = [
-    "./node_modules/jquery/**/*",
-    "./node_modules/jquery-validation/**/*",
-    "./node_modules/jquery-validation-unobtrusive/**/*",
-    "./node_modules/requirejs/**/*",
-    "./node_modules/@types/**/*",
-    "./node_modules/bootstrap/**/*"
-  ];
-  var tasks = libraryPaths.map(function (path) {
-    return gulp
-      .src(path, { base: "./node_modules" })
-      .pipe(gulp.dest("./wwwroot/lib"));
-  });
-  return merge(tasks);
-});
 
 
 

@@ -1,28 +1,33 @@
 {
-  "_from": "jquery-validation",
+  "_args": [
+    [
+      "jquery-validation@1.19.0",
+      "C:\\Development\\NetCore\\aspnetcoredevtemplate\\src\\AspNetCoreDevTemplate.Web"
+    ]
+  ],
+  "_from": "jquery-validation@1.19.0",
   "_id": "jquery-validation@1.19.0",
   "_inBundle": false,
   "_integrity": "sha1-D+3wwEg6AwxP/wcjmImKwYz9bkA=",
   "_location": "/jquery-validation",
   "_phantomChildren": {},
   "_requested": {
-    "type": "tag",
+    "type": "version",
     "registry": true,
-    "raw": "jquery-validation",
+    "raw": "jquery-validation@1.19.0",
     "name": "jquery-validation",
     "escapedName": "jquery-validation",
-    "rawSpec": "",
+    "rawSpec": "1.19.0",
     "saveSpec": null,
-    "fetchSpec": "latest"
+    "fetchSpec": "1.19.0"
   },
   "_requiredBy": [
-    "#USER",
-    "/"
+    "/",
+    "/jquery-validation-unobtrusive"
   ],
   "_resolved": "http://registry.npm.taobao.org/jquery-validation/download/jquery-validation-1.19.0.tgz",
-  "_shasum": "0fedf0c0483a030c4fff072398898ac18cfd6e40",
-  "_spec": "jquery-validation",
-  "_where": "C:\\Dev\\AspNetCore\\aspnetcoredevtemplate\\src\\AspNetCoreDevTemplate.Web",
+  "_spec": "1.19.0",
+  "_where": "C:\\Development\\NetCore\\aspnetcoredevtemplate\\src\\AspNetCoreDevTemplate.Web",
   "author": {
     "name": "Jörn Zaefferer",
     "email": "joern.zaefferer@gmail.com",
@@ -31,11 +36,9 @@
   "bugs": {
     "url": "https://github.com/jquery-validation/jquery-validation/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {
     "jquery": "^1.7 || ^2.0 || ^3.1"
   },
-  "deprecated": false,
   "description": "Client-side form validation made easy",
   "devDependencies": {
     "commitplease": "2.3.1",

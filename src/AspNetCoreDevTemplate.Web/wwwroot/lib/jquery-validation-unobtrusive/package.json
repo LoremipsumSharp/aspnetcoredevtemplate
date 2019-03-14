@@ -1,40 +1,42 @@
 {
-  "_from": "jquery-validation-unobtrusive",
+  "_args": [
+    [
+      "jquery-validation-unobtrusive@3.2.11",
+      "C:\\Development\\NetCore\\aspnetcoredevtemplate\\src\\AspNetCoreDevTemplate.Web"
+    ]
+  ],
+  "_from": "jquery-validation-unobtrusive@3.2.11",
   "_id": "jquery-validation-unobtrusive@3.2.11",
   "_inBundle": false,
   "_integrity": "sha1-F17kY4A4Wg4z7TIPJV+tMh9o+fU=",
   "_location": "/jquery-validation-unobtrusive",
   "_phantomChildren": {},
   "_requested": {
-    "type": "tag",
+    "type": "version",
     "registry": true,
-    "raw": "jquery-validation-unobtrusive",
+    "raw": "jquery-validation-unobtrusive@3.2.11",
     "name": "jquery-validation-unobtrusive",
     "escapedName": "jquery-validation-unobtrusive",
-    "rawSpec": "",
+    "rawSpec": "3.2.11",
     "saveSpec": null,
-    "fetchSpec": "latest"
+    "fetchSpec": "3.2.11"
   },
   "_requiredBy": [
-    "#USER",
     "/"
   ],
   "_resolved": "http://registry.npm.taobao.org/jquery-validation-unobtrusive/download/jquery-validation-unobtrusive-3.2.11.tgz",
-  "_shasum": "175ee46380385a0e33ed320f255fad321f68f9f5",
-  "_spec": "jquery-validation-unobtrusive",
-  "_where": "C:\\Dev\\AspNetCore\\aspnetcoredevtemplate\\src\\AspNetCoreDevTemplate.Web",
+  "_spec": "3.2.11",
+  "_where": "C:\\Development\\NetCore\\aspnetcoredevtemplate\\src\\AspNetCoreDevTemplate.Web",
   "author": {
     "name": "Microsoft"
   },
   "bugs": {
     "url": "https://github.com/aspnet/jquery-validation-unobtrusive/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {
     "jquery": ">=1.8",
     "jquery-validation": ">=1.16"
   },
-  "deprecated": false,
   "description": "Add-on to jQuery Validation to enable unobtrusive validation options in data-* attributes.",
   "devDependencies": {
     "gulp": "3.9.1",
