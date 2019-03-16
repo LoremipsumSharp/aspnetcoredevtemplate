@@ -55,7 +55,7 @@ gulp.task("copy-lib", function () {
 
 gulp.task(
   "js-build:dev",
-  gulp.series(["clean-scripts", 'ts-compile'], function () {
+  gulp.series(function () {
     return gulp
       .src("./wwwroot/js/src/**/*.js")
       .pipe(changed("wwwroot/js/dist"))
@@ -115,8 +115,6 @@ gulp.task(
       }))
       .pipe(gulp.dest("./wwwroot/js/dist", { "overwrite": true }));
   }))
-
-
 
 
 

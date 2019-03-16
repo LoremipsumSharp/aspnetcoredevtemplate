@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@types/jquery": "^3.3.29",
+    "axios": "^0.18.0",
     "bootstrap": "^3.3.7",
     "jquery": "^3.3.1",
     "jquery-validation": "^1.19.0",
@@ -49,6 +50,9 @@
   },
   "browserify-shim": {
     "jquery": "global:jQuery"
+  },
+  "browser": {
+    "vue": "vue/dist/vue.common.js"
   },
   "browserify": {
     "transform": [

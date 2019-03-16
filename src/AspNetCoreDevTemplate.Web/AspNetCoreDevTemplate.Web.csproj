@@ -21,7 +21,7 @@
     <Exec Command="gulp js-build:dev" />
   </Target>
 
-  <Target Name="RunGulpWatch" AfterTargets="Publish">
+  <Target Name="RunGulpProd" AfterTargets="Publish">
     <Exec Command="gulp js-build:prod" />
   </Target>
 </Project>
