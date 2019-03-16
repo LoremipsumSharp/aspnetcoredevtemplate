@@ -1,0 +1,55 @@
+{
+  "_from": "@types/tern@*",
+  "_id": "@types/tern@0.23.0",
+  "_inBundle": false,
+  "_integrity": "sha1-FEMm96U7ATp9y/dw9gJuB1/rvQE=",
+  "_location": "/@types/tern",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "@types/tern@*",
+    "name": "@types/tern",
+    "escapedName": "@types%2ftern",
+    "scope": "@types",
+    "rawSpec": "*",
+    "saveSpec": null,
+    "fetchSpec": "*"
+  },
+  "_requiredBy": [
+    "/@types/codemirror"
+  ],
+  "_resolved": "http://registry.npm.taobao.org/@types/tern/download/@types/tern-0.23.0.tgz",
+  "_shasum": "144326f7a53b013a7dcbf770f6026e075febbd01",
+  "_spec": "@types/tern@*",
+  "_where": "C:\\Development\\NetCore\\aspnetcoredevtemplate\\src\\AspNetCoreDevTemplate.Web\\node_modules\\@types\\codemirror",
+  "bugs": {
+    "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Nikolaj Kappler",
+      "url": "https://github.com/nkappler"
+    }
+  ],
+  "dependencies": {
+    "@types/estree": "*"
+  },
+  "deprecated": false,
+  "description": "TypeScript definitions for tern",
+  "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped#readme",
+  "license": "MIT",
+  "main": "",
+  "name": "@types/tern",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+    "directory": "types/tern"
+  },
+  "scripts": {},
+  "typeScriptVersion": "2.8",
+  "types": "index",
+  "typesPublisherContentHash": "d13aadf643d187d236ecc25305db1c12921bdefa78d6d00af981a51416045fb6",
+  "version": "0.23.0"
+}
