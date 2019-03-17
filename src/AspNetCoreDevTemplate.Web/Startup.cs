@@ -15,6 +15,7 @@ using AspNetCoreDevTemplate.Infastructure.Quartz;
 using AspNetCoreDevTemplate.Web.Models;
 using Microsoft.Extensions.Messaging.RabbitMQ;
 using System.Diagnostics;
+using Microsoft.AspNetCore.ResponseCompression;
 
 namespace AspNetCoreDevTemplate.Web
 {
@@ -38,8 +39,15 @@ namespace AspNetCoreDevTemplate.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            services.Configure<GzipCompressionProviderOptions>(options => options.Level = System.IO.Compression.CompressionLevel.Optimal);
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<GzipCompressionProvider>();
+                options.EnableForHttps = true;
 
-            
+            });
+
+
             services.AddEventHandlers(AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.StartsWith("Service")));
             services.UseQuartz(typeof(HelloWorldJob));
             services.AddRabbitMQ(x =>
@@ -55,7 +63,6 @@ namespace AspNetCoreDevTemplate.Web
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -68,6 +75,7 @@ namespace AspNetCoreDevTemplate.Web
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            app.UseResponseCompression();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

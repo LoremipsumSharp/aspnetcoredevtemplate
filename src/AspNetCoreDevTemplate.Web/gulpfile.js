@@ -55,7 +55,7 @@ gulp.task("copy-lib", function () {
 
 gulp.task(
   "js-build:dev",
-  gulp.series(["clean-scripts", 'ts-compile'], function () {
+  gulp.series(['ts-compile',function () {
     return gulp
       .src("./wwwroot/js/src/**/*.js")
       .pipe(changed("wwwroot/js/dist"))
@@ -114,9 +114,7 @@ gulp.task(
         }
       }))
       .pipe(gulp.dest("./wwwroot/js/dist", { "overwrite": true }));
-  }))
-
-
+  }]))
 
 
 
@@ -124,7 +122,7 @@ gulp.task(
 
 gulp.task(
   "js-build:prod",
-  gulp.series(["ts-compile", "clean-scripts"]), function () {
+  gulp.series(["clean-scripts",function () {
     return gulp
       .src("wwwroot/js/src/**/*.js")
       .pipe(print())
@@ -142,7 +140,35 @@ gulp.task(
                 }
               ]
             ]
-          }).bundle()
+          }).transform("browserify-css", {
+            minify: true,
+            global: true,
+            rootDir: './wwwroot',
+            processRelativeUrl: function (relativeUrl) {
+              gutil.log(relativeUrl)
+              var stripQueryStringAndHashFromPath = function (url) {
+                return url.split('?')[0].split('#')[0];
+              };
+              var rootDir = path.resolve(process.cwd(), 'wwwroot');
+              gutil.log(rootDir)
+              var relativePath = stripQueryStringAndHashFromPath(relativeUrl);
+              var queryStringAndHash = relativeUrl.substring(relativePath.length);
+
+              var prefix = '../node_modules/';
+
+              var vendorPath = 'lib/' + relativePath.substring(prefix.length);
+              var source = path.join(rootDir, relativePath);
+              var target = path.join(rootDir, vendorPath);
+
+              gutil.log('Copying file from ' + JSON.stringify(source) + ' to ' + JSON.stringify(target));
+              fse.copySync(source, target);
+
+              // Returns a new path string with original query string and hash fragments
+              return vendorPath + queryStringAndHash;
+            }
+          })
+
+          .bundle()
       }))
       .pipe(buffer())
       .pipe(
@@ -152,7 +178,7 @@ gulp.task(
       )
       .pipe(uglify())
       .pipe(gulp.dest("wwwroot/js/dist"));
-  })
+  }]))
 
 gulp.task("watch:js-src", function () {
   return gulp.watch("wwwroot/js/src/**/*.js", gulp.series(["js-build:dev"]));
