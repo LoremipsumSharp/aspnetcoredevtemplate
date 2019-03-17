@@ -72,8 +72,10 @@ namespace AspNetCoreDevTemplate.Web
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UsePathBase("/app");
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseResponseCompression();
             app.UseStaticFiles();
