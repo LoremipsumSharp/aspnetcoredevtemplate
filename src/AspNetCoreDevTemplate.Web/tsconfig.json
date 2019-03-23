@@ -5,9 +5,13 @@
         "moduleResolution": "node",
         "outDir": "./wwwroot/ts/dist",
         "strictNullChecks": true,
-        "target": "ES5"
+        "target": "ES5",
+        "typeRoots": [
+            "./node_modules/@types",
+            "./wwwroot/ts/src/@types"
+        ]
     },
     "include": [
-        "./wwwroot/ts/src/**/*.ts"
+        "./wwwroot/ts/src/**/*"
     ]
 }
