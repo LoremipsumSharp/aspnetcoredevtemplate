@@ -25,7 +25,14 @@ namespace AspNetCoreDevTemplate.Web.Controllers
         .RepeatForever())
       .Build();
             _scheduler.StartJob<HelloWorldJob>(trigger);
+            
             return Ok("Job is running");
         }
+
+        public IActionResult Start()
+        {
+            return Ok("start the job");
+        }
+
     }
 }

@@ -49,7 +49,7 @@ namespace AspNetCoreDevTemplate.Web
 
 
             services.AddEventHandlers(AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.StartsWith("Service")));
-            services.UseQuartz(typeof(HelloWorldJob));
+            services.UseQuartz(Configuration, typeof(HelloWorldJob));
             services.AddRabbitMQ(x =>
             {
                 x.Subscribe<SimpleMQMessage>((msg, token) =>
